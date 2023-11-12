@@ -3,24 +3,25 @@ The application is a web-based API designed to perform coordinate-based searches
 
 # Used Patterns and Technologies:
 
-## Architecture Patterns:
-
-Onion Architecture: The project follows the Onion Architecture, organizing code in layers for enhanced modularity and maintainability.
+#### Onion Architecture
+The project follows the Onion Architecture, organizing code in layers for enhanced modularity and maintainability.
 Design Pattern:
 
-Repository Pattern: The application employs the Repository pattern, providing a structured way to manage data access and storage.
+#### Repository Pattern
+The application employs the Repository pattern, providing a structured way to manage data access and storage.
 
-Unit Tests: 
+#### Unit Tests
 The inclusion of unit tests ensures the reliability and correctness of the application, contributing to overall code quality.
 Containerization:
 
-Docker: The entire application is containerized using Docker, facilitating seamless deployment and portability across environments.
+#### Docker
+The entire application is containerized using Docker, facilitating seamless deployment and portability across environments.
 
-Database Connectivity:
+#### Database Connectivity
 SQL Server in Container: The application establishes a connection to a SQL Server, which is containerized for efficient management and deployment.
 
-Programming Paradigm:
-Aspect-Oriented Programming (AOP): AOP is implemented to ensure the integrity of the model sent to the API endpoint, enhancing maintainability and readability of the codebase.
+#### Programming Paradigm
+Aspect-Oriented Programming (AOP): AOP is implemented to ensure the integrity of the model sent to the API endpoint.
 
 
 ## Request-Response Information:
@@ -76,3 +77,6 @@ Response:
     "statusCode": 200
 }
 ```
+
+
+All the settings can be found in Project.Core/Settings/settings.json file.
