@@ -21,3 +21,58 @@ SQL Server in Container: The application establishes a connection to a SQL Serve
 
 Programming Paradigm:
 Aspect-Oriented Programming (AOP): AOP is implemented to ensure the integrity of the model sent to the API endpoint, enhancing maintainability and readability of the codebase.
+
+
+## Request-Response Information:
+
+Endpoint:
+POST http://localhost:5000/api/Rectangles/Search
+
+Request Body:
+```
+[
+  {
+    "x": 1,
+    "y": 1
+  }
+]
+```
+
+Response:
+
+```
+{
+    "success": true,
+    "error": null,
+    "data": [
+        {
+            "x": 1,
+            "y": 1,
+            "rectangleCount": 4,
+            "rectangles": [
+                {
+                    "id": 1,
+                    "x": 0,
+                    "y": 0
+                },
+                {
+                    "id": 2,
+                    "x": 0,
+                    "y": 1
+                },
+                {
+                    "id": 15,
+                    "x": 1,
+                    "y": 0
+                },
+                {
+                    "id": 16,
+                    "x": 1,
+                    "y": 1
+                }
+            ]
+        }
+    ],
+    "statusCode": 200
+}
+```
