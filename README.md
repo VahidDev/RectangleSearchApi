@@ -20,9 +20,20 @@ The entire application is containerized using Docker, facilitating seamless depl
 #### Database Connectivity
 SQL Server in Container: The application establishes a connection to a SQL Server, which is containerized for efficient management and deployment.
 
+#### Indexing
+
+The project employs both a clustered index (default primary key ID) and a composite unclustered index for the X and Y coordinates combined. This indexing strategy enhances database query performance.
+
 #### Programming Paradigm
 Aspect-Oriented Programming (AOP): AOP is implemented to ensure the integrity of the model sent to the API endpoint.
 
+#### Authentication
+
+Basic authentication is implemented for secure API access. Include the following Authorization header for testing:
+
+Authorization: Basic dGVzdFVzZXJuYW1lOnRlc3RQYXNzd29yZA==
+
+Note that all the settings (basic auth credentials) can be found in Project.Core/Settings/settings.json file.
 
 ## Request-Response Information:
 
@@ -77,6 +88,3 @@ Response:
     "statusCode": 200
 }
 ```
-
-
-All the settings can be found in Project.Core/Settings/settings.json file.
