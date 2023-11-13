@@ -11,7 +11,6 @@ The application employs the Repository pattern, providing a structured way to ma
 
 #### Unit Tests
 The inclusion of unit tests ensures the reliability and correctness of the application, contributing to overall code quality.
-Containerization:
 
 #### Docker
 The entire application is containerized using Docker, facilitating seamless deployment and portability across environments.
