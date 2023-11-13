@@ -91,7 +91,7 @@ namespace Rectangle.Tests
             };
 
             _rectangleRepositoryMock.Setup(r => r.GetAllAsNoTracking(It.IsAny<Expression<Func<RectangleModel, bool>>>()))
-                                .Throws(new Exception("Simulated exception"));
+                                    .Throws(new Exception("Simulated exception"));
 
             // Act
             var actualResult = _sut.GetAllRectangles(coordinates);
