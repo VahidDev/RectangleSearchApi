@@ -5,7 +5,6 @@ The application is a web-based API designed to perform coordinate-based searches
 
 #### Onion Architecture
 The project follows the Onion Architecture, organizing code in layers for enhanced modularity and maintainability.
-Design Pattern:
 
 #### Repository Pattern
 The application employs the Repository pattern, providing a structured way to manage data access and storage.
