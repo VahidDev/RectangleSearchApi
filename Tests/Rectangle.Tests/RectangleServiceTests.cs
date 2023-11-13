@@ -11,13 +11,19 @@ namespace Rectangle.Tests
 {
     public class RectangleServiceTests
     {
+        private Mock<IRectangleRepository> _rectangleRepositoryMock;
+        private readonly RectangleService _sut;
+
+        public RectangleServiceTests()
+        {
+            _rectangleRepositoryMock = new Mock<IRectangleRepository>();
+            _sut = new RectangleService(_rectangleRepositoryMock.Object);
+        }
+
         [Fact]
         public void GetAllRectangles_Should_Return_Valid_Result()
         {
             // Arrange
-            var rectangleRepository = new Mock<IRectangleRepository>();
-            var rectangleService = new RectangleService(rectangleRepository.Object);
-
             var coordinate = new SearchCoordinateDto { X = 1, Y = 1 };
             var coordinates = new List<SearchCoordinateDto>
             {
@@ -48,12 +54,12 @@ namespace Rectangle.Tests
                 StatusCode = (int)HttpStatusCode.OK
             };
 
-            rectangleRepository
+            _rectangleRepositoryMock
                 .Setup(r => r.GetAllAsNoTracking(It.IsAny<Expression<Func<RectangleModel, bool>>>()))
                 .Returns(resultCoordinates[0].Rectangles.AsQueryable());
 
             // Act
-            var actualResult = rectangleService.GetAllRectangles(coordinates);
+            var actualResult = _sut.GetAllRectangles(coordinates);
 
             // Assert
             Assert.NotNull(actualResult);
@@ -72,9 +78,6 @@ namespace Rectangle.Tests
         public void GetAllRectangles_Should_Handle_Exception()
         {
             // Arrange
-            var rectangleRepository = new Mock<IRectangleRepository>();
-            var rectangleService = new RectangleService(rectangleRepository.Object);
-
             var coordinates = new List<SearchCoordinateDto>
             {
                 new SearchCoordinateDto { X = 1, Y = 1 },
@@ -87,11 +90,11 @@ namespace Rectangle.Tests
                 Error = "Simulated exception"
             };
 
-            rectangleRepository.Setup(r => r.GetAllAsNoTracking(It.IsAny<Expression<Func<RectangleModel, bool>>>()))
+            _rectangleRepositoryMock.Setup(r => r.GetAllAsNoTracking(It.IsAny<Expression<Func<RectangleModel, bool>>>()))
                                 .Throws(new Exception("Simulated exception"));
 
             // Act
-            var actualResult = rectangleService.GetAllRectangles(coordinates);
+            var actualResult = _sut.GetAllRectangles(coordinates);
 
             // Assert
             Assert.NotNull(actualResult);
