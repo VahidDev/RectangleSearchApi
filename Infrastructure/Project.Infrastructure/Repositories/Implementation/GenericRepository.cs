@@ -6,8 +6,8 @@ using System.Linq.Expressions;
 
 namespace Project.Infrastructure.Repositories.Implementation
 {
-    public class GenericRepository<TEntity> : IGenericRepository<TEntity> 
-        where TEntity : class
+    public class GenericRepository<TEntity> : IGenericRepository<TEntity>
+         where TEntity : class
     {
         private readonly AppDbContext _dbContext;
 
@@ -19,47 +19,42 @@ namespace Project.Infrastructure.Repositories.Implementation
             _dbContext = dbContext;
         }
 
-        public Result Add(TEntity item)
+        public async Task<Result> AddAsync(TEntity item)
         {
             var result = new Result();
 
             try
             {
-                DbSet.Add(item);
-                _dbContext.SaveChanges();
+                await DbSet.AddAsync(item);
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 result.Success = false;
-                result.Error = ex.Message; 
+                result.Error = ex.Message;
             }
 
             return result;
         }
 
-        public bool Any(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return DbSet.Any(predicate);
+            return await DbSet.AnyAsync(predicate);
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter)
         {
-            return DbSet.FirstOrDefault(filter);
+            return await DbSet.FirstOrDefaultAsync(filter);
         }
 
-        public IQueryable<TEntity> GetAllAsNoTracking(Expression<Func<TEntity, bool>> filter = null)
-        {
-            return filter == null ? DbSet.AsNoTracking() : DbSet.Where(filter).AsNoTracking();
-        }
-
-        public Result Update(TEntity item)
+        public async Task<Result> UpdateAsync(TEntity item)
         {
             var result = new Result();
 
             try
             {
                 DbSet.Update(item);
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -70,14 +65,14 @@ namespace Project.Infrastructure.Repositories.Implementation
             return result;
         }
 
-        public Result AddRange(ICollection<TEntity> items)
+        public async Task<Result> AddRangeAsync(ICollection<TEntity> items)
         {
             var result = new Result();
 
             try
             {
-                DbSet.AddRange(items);
-                _dbContext.SaveChanges();
+                await DbSet.AddRangeAsync(items);
+                await _dbContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -86,6 +81,11 @@ namespace Project.Infrastructure.Repositories.Implementation
             }
 
             return result;
+        }
+
+        public IQueryable<TEntity> GetAllAsNoTracking(Expression<Func<TEntity, bool>> filter = null)
+        {
+            return filter == null ? DbSet.AsNoTracking() : DbSet.Where(filter).AsNoTracking();
         }
     }
 }

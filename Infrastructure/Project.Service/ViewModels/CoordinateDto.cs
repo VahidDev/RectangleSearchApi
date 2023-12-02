@@ -7,7 +7,7 @@ namespace Project.Service.ViewModels
         public int X { get; set; }
         public int Y { get; set; }
         public required int RectangleCount { get; init; }
-        public required IEnumerable<RectangleModel> Rectangles { get; init; }
+        public required IList<RectangleModel> Rectangles { get; init; }
 
         public CoordinateDto(int x, int y)
         {

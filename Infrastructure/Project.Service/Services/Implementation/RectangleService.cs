@@ -33,12 +33,13 @@ namespace Project.Service.Services.Implementation
                     var x = coordinate.X;
                     var y = coordinate.Y;
 
-                    var subRectangles = dbRectangles.Where(r => r.X <= x && r.Y <= y);
+                    var subRectangles = dbRectangles.Where(r => r.X <= x && r.Y <= y)
+                                                    .ToList();
 
                     var coordinateDto = new CoordinateDto(x, y)
                     {
                         Rectangles = subRectangles,
-                        RectangleCount = subRectangles.Count()
+                        RectangleCount = subRectangles.Count
                     };
 
                     coordinateDtos.Add(coordinateDto);

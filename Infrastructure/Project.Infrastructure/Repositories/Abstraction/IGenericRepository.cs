@@ -6,10 +6,10 @@ namespace Project.Infrastructure.Repositories.Abstraction
     public interface IGenericRepository<TEntity> where TEntity : class
     {
         IQueryable<TEntity> GetAllAsNoTracking(Expression<Func<TEntity, bool>> filter = null);
-        bool Any(Expression<Func<TEntity, bool>> predicate);
-        TEntity Get(Expression<Func<TEntity, bool>> filter);
-        Result Add(TEntity item);
-        Result AddRange(ICollection<TEntity> items);
-        Result Update(TEntity item);
+        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter);
+        Task<Result> AddAsync(TEntity item);
+        Task<Result> AddRangeAsync(ICollection<TEntity> items);
+        Task<Result> UpdateAsync(TEntity item);
     }
 }
